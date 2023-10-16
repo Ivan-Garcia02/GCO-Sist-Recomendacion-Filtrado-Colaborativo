@@ -33,22 +33,31 @@ def pearson(u_values, v_values):
             div_u += math.pow((u_values[i] - u_average), 2)
             div_v += math.pow((v_values[i] - v_average), 2)
 
-    return round(sum / (math.sqrt(div_u) * math.sqrt(div_v)), 6)
+    return round(sum / (math.sqrt(div_u) * math.sqrt(div_v)), 10)
 
 parser = argparse.ArgumentParser(prog='ProgramName', description='What the program does', epilog='Text at the bottom of help')
 parser.add_argument('-f', '--filename', type=str, required=True, help="Fichero de entrada")
-parser.add_argument('-m', '--metrica', type=int, required=True, choices=range(1,4), help="Metrica elegida. 1. Correlacion de Pearson. 2.Distancia coseno. 3.Distancia Euclidea.")
+parser.add_argument('-m', '--metrica', type=int, required=True, choices=range(1,4), help="Metrica elegida. 1. Correlacion de Pearson. 2. Distancia coseno. 3. Distancia Euclidea.")
 parser.add_argument('-v', '--nVecinos', type=int, required=True, help="Numero de vecinos considerados")
-parser.add_argument('-p', '--prediccion', type=int, required=True, choices=range(1,3), help="Tipo de prediccion: 1.Prediccion simple. 2.Diferencia con la media.")
+parser.add_argument('-p', '--prediccion', type=int, required=True, choices=range(1,3), help="Tipo de prediccion: 1. Prediccion simple. 2. Diferencia con la media.")
 
 args = parser.parse_args()
 read_file(args.filename)
 
+
 matrix = matrix - min_value
 print(matrix)
+
 for i in range(len(matrix)):
-    for j in range(i + 1, len(matrix)):
-        print(i, j, pearson(matrix[i], matrix[j]))
+    for j in matrix[i]:
+        if j < 0:
+            similarity = []
+            for k in range(len(matrix)):
+                if i == k:
+                    similarity.append(10)
+                else:
+                    similarity.append(pearson(matrix[i], matrix[k]))
+            print(similarity)
 
 #x = args.foo
 #print(x)
