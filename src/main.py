@@ -48,16 +48,27 @@ read_file(args.filename)
 matrix = matrix - min_value
 print(matrix)
 
+
 for i in range(len(matrix)):
     for j in matrix[i]:
         if j < 0:
             similarity = []
             for k in range(len(matrix)):
-                if i == k:
-                    similarity.append(10)
-                else:
-                    similarity.append(pearson(matrix[i], matrix[k]))
+                if i != k:
+                    similarity.append((k, pearson(matrix[i], matrix[k])))
+            similarity.sort(key=lambda x: x[1], reverse=True)
             print(similarity)
+
+neighbours = 2
+
+print("Vecinos seleccionados: ")
+for i in range(neighbours):
+    print(similarity[i][0] + 1)
+
+
+
+
+
 
 #x = args.foo
 #print(x)
