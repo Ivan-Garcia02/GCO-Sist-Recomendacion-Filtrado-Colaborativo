@@ -4,14 +4,6 @@ import math
 import sys
 from file_reader import read_file
 
-min_value = 1.0
-max_value = 5.0
-matrix = numpy.array([[5.0, 3.0, 4.0, 4.0, -1.0],
-    [3.0, 1.0, 2.0, 3.0, 3.0], 
-    [4.0, 3.0, 4.0, 3.0, 5.0],
-    [3.0, 3.0, 1.0, 5.0, 4.0],
-    [1.0, 5.0, 5.0, 2.0, 1.0]])
-
 def pearson(u_values, v_values):
     sum = 0
     div_u = 0
@@ -42,12 +34,12 @@ parser.add_argument('-v', '--nVecinos', type=int, required=True, help="Numero de
 parser.add_argument('-p', '--prediccion', type=int, required=True, choices=range(1,3), help="Tipo de prediccion: 1. Prediccion simple. 2. Diferencia con la media.")
 
 args = parser.parse_args()
-read_file(args.filename)
+matrix = read_file(args.filename)
+if matrix is None:
+    print('Ha ocurrido un error leyendo el fichero')
+    quit()
 
-
-matrix = matrix - min_value
 print(matrix)
-
 
 for i in range(len(matrix)):
     for j in matrix[i]:
@@ -59,15 +51,10 @@ for i in range(len(matrix)):
             similarity.sort(key=lambda x: x[1], reverse=True)
             print(similarity)
 
-neighbours = 2
-
-print("Vecinos seleccionados: ")
-for i in range(neighbours):
-    print(similarity[i][0] + 1)
-
-
-
-
+            neighbours = args.nVecinos
+            print("Vecinos seleccionados: ")
+            for i in range(neighbours):
+                print(similarity[i][0] + 1)
 
 
 #x = args.foo
