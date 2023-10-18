@@ -1,31 +1,29 @@
 import argparse
 import numpy
 import math
-import sys
 from file_reader import read_file
 
 def pearson(u_values, v_values):
-    sum = 0
-    div_u = 0
-    div_v = 0
-
+    # Elimina las columnas con incognita
+    u_filtered_values = []
+    v_filtered_values = []
     for i in range(len(u_values)):
-        u_sum, v_sum, number_of_values = 0, 0, 0
-
-        for j in range(len(u_values)):
-            if u_values[j] >= 0 and v_values[j] >= 0:
-                u_sum += u_values[j]
-                v_sum += v_values[j]
-                number_of_values += 1
-        u_average = u_sum / number_of_values
-        v_average = v_sum / number_of_values
-
         if u_values[i] >= 0 and v_values[i] >= 0:
-            sum += (u_values[i] - u_average) * (v_values[i] - v_average)
-            div_u += math.pow((u_values[i] - u_average), 2)
-            div_v += math.pow((v_values[i] - v_average), 2)
+            u_filtered_values.append(u_values[i])
+            v_filtered_values.append(v_values[i])
 
-    return round(sum / (math.sqrt(div_u) * math.sqrt(div_v)), 10)
+    # Calcula el coeficiente de Pearson
+    u_average = sum(u_filtered_values) / len(u_filtered_values)
+    v_average = sum(v_filtered_values) / len(v_filtered_values)
+    numerator = 0
+    u_denominator = 0
+    v_denominator = 0
+    for i in range(len(u_filtered_values)):
+        numerator += (u_filtered_values[i] - u_average) * (v_filtered_values[i] - v_average)
+        u_denominator += math.pow((u_filtered_values[i] - u_average), 2)
+        v_denominator += math.pow((v_filtered_values[i] - v_average), 2)
+
+    return round(numerator / (math.sqrt(u_denominator) * math.sqrt(v_denominator)), 10)
 
 parser = argparse.ArgumentParser(prog='ProgramName', description='What the program does', epilog='Text at the bottom of help')
 parser.add_argument('-f', '--filename', type=str, required=True, help="Fichero de entrada")
@@ -54,9 +52,4 @@ for i in range(len(matrix)):
             neighbours = args.nVecinos
             print("Vecinos seleccionados: ")
             for i in range(neighbours):
-                print(similarity[i][0] + 1)
-
-
-#x = args.foo
-#print(x)
-#print(parser.parse_args(sys.argv[1:]))
+                print(similarity[i][0])

@@ -7,11 +7,17 @@ def read_file(file_path):
             print("El valor mínimo debe ser menor al valor máximo")
             return
 
+        n_columns = 0
         while True:
             line = file.readline()
             if not line:
                 break
             splitted_line = line.split()
+            if n_columns == 0:
+                n_columns = len(splitted_line)
+            if len(splitted_line) != n_columns:
+                print("Todas las filas de la matriz deben tener el mismo número de columnas")
+                return
             values = []
             for value in splitted_line:
                 if value == '-':
