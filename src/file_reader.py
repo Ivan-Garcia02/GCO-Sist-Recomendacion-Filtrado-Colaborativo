@@ -33,4 +33,4 @@ def read_file(file_path):
                     values.append(value - min_value)
             matrix.append(values)
     file.close()
-    return matrix
+    return matrix, min_value, max_value
