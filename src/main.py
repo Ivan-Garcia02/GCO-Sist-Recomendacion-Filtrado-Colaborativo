@@ -12,7 +12,7 @@ def pearson(u_values, v_values):
             u_filtered_values.append(u_values[i])
             v_filtered_values.append(v_values[i])
 
-    # Calcula el coeficiente de Pearson
+    # Calcula el coeficiente de correlacion de Pearson
     u_average = sum(u_filtered_values) / len(u_filtered_values)
     v_average = sum(v_filtered_values) / len(v_filtered_values)
     numerator = 0
@@ -24,6 +24,35 @@ def pearson(u_values, v_values):
         v_denominator += math.pow((v_filtered_values[i] - v_average), 2)
 
     return round(numerator / (math.sqrt(u_denominator) * math.sqrt(v_denominator)), 10)
+
+def distancia_coseno(u_values, v_values):
+    # Elimina las columnas con incognita
+    u_filtered_values = []
+    v_filtered_values = []
+    for i in range(len(u_values)):
+        if u_values[i] >= 0 and v_values[i] >= 0:
+            u_filtered_values.append(u_values[i])
+            v_filtered_values.append(v_values[i])
+
+    # Calcula la distancia coseno
+    numerator = 0
+    u_denominator = 0
+    v_denominator = 0
+    for i in range(len(u_filtered_values)):
+        numerator += u_filtered_values[i] * v_filtered_values[i]
+        u_denominator += math.pow((u_filtered_values[i]), 2)
+        v_denominator += math.pow((v_filtered_values[i]), 2)
+
+    return round(numerator / (math.sqrt(u_denominator) * math.sqrt(v_denominator)), 10)
+
+def prediccion_simple(similitary, neighbours):
+    numerator = 0
+    denominator = 0
+    for i in range(neighbours):
+        numerator += (similarity[i][1] * similarity[i][2])
+        denominator += abs(similarity[i][1])
+
+    return round(numerator/denominator, 3)
 
 parser = argparse.ArgumentParser(prog='ProgramName', description='What the program does', epilog='Text at the bottom of help')
 parser.add_argument('-f', '--filename', type=str, required=True, help="Fichero de entrada")
@@ -40,16 +69,19 @@ if matrix is None:
 print(matrix)
 
 for i in range(len(matrix)):
-    for j in matrix[i]:
-        if j < 0:
+    for j in range(len(matrix[i])):
+        if matrix[i][j] < 0:
             similarity = []
             for k in range(len(matrix)):
                 if i != k:
-                    similarity.append((k, pearson(matrix[i], matrix[k])))
+                    similarity.append((k, distancia_coseno(matrix[i], matrix[k]), matrix[k][j]))
             similarity.sort(key=lambda x: x[1], reverse=True)
             print(similarity)
 
             neighbours = args.nVecinos
             print("Vecinos seleccionados: ")
-            for i in range(neighbours):
-                print(similarity[i][0])
+            for k in range(neighbours):
+                print(similarity[k][0])
+
+            matrix[i][j] = prediccion_simple(similarity, neighbours)
+            print(matrix)
