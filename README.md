@@ -8,7 +8,7 @@ Durante el desarrollo del proyecto no se ha hecho uso de ninguna librería exter
 
 ## Descripción del código
 
-El código del proyecto se encuentra en dividido en varios ficheros.
+El código del proyecto se encuentra dividido en varios ficheros.
 
 ### file_reader
 
@@ -52,10 +52,10 @@ Este fichero contiene el cuerpo principal del programa. En este se recogen los a
 
 ## Ejemplo de uso
 
-Un ejemplo de uso sería el siguiente: `python3 src/main.py -f example.txt -v 3 -m 1 -p 1`.
+Un ejemplo de uso sería el siguiente: `python3 src/main.py -f example.txt -v 3 -m 1 -p 1`
 
-Lo primero llamamos al interprete *python3* con el fichero a ejecutar *src/main.py*. A continuación, añadimos las opciones para la ejecucion:
-* -f | --filename: Nombre del fichero de entrada con la matrix de utilidad.
+Llamamos al intérprete *python3* con el fichero a ejecutar *src/main.py* y añadimos las opciones para la ejecución:
+* -f | --filename: Nombre del fichero de entrada con la matriz de utilidad
 * -v | --nVecinos: Número de vecinos a considerar
-* -m | --metrica: Métrica elegida. 1. Correlacion de Pearson. 2. Distancia coseno. 3. Distancia Euclidea.
-* -p | --prediccion: Tipo de predicción elegida: 1. Prediccion simple. 2. Diferencia con la media.
+* -m | --metrica: Métrica elegida - 1. Correlación de Pearson. 2. Distancia coseno. 3. Distancia euclídea.
+* -p | --prediccion: Tipo de predicción elegida - 1. Predicción simple. 2. Diferencia con la media.
