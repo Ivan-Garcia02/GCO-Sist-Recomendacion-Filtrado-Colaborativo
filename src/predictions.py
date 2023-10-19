@@ -16,8 +16,8 @@ def difference_with_average(similarity, neighbours, matrix, u_index):
     # Calculo de la media de u
     long = 0
     for i in range(len(matrix[u_index])):
-        if matrix[u_index][j] >= 0:
-            u_average += matrix[u_index][j]
+        if matrix[u_index][i] >= 0:
+            u_average += matrix[u_index][i]
             long += 1
     u_average = u_average / long
 
@@ -30,7 +30,7 @@ def difference_with_average(similarity, neighbours, matrix, u_index):
                 v_average += matrix[similarity[i][0]][j]
                 long += 1
         v_average = v_average / long
-        
+
         # Calcula la diferencia de la media
         numerator += (similarity[i][1] * (similarity[i][2] - v_average))
         denominator += abs(similarity[i][1])

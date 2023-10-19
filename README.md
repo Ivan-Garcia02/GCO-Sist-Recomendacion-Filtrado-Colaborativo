@@ -4,7 +4,7 @@
 
 ## Instrucciones de instalación
 
-Python
+Durante el desarrollo del proyecto no se ha hecho uso de ninguna librería externa, por lo que para su ejecución debería bastar con la instalación del intérprete de Python.
 
 ## Descripción del código
 
