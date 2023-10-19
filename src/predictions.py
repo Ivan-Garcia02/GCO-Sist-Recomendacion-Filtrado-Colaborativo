@@ -1,4 +1,5 @@
-def prediccion_simple(similarity, neighbours):
+def simple_prediction(similarity, neighbours):
+    # Calcula la predicción simple
     numerator = 0
     denominator = 0
     for i in range(neighbours):
@@ -7,7 +8,7 @@ def prediccion_simple(similarity, neighbours):
 
     return round(numerator/denominator, 3)
 
-def diferencia_con_media(similarity, neighbours, matrix, u_index):
+def difference_with_average(similarity, neighbours, matrix, u_index):
     u_filtered_values = []
     v_filtered_values = []
     numerator = 0

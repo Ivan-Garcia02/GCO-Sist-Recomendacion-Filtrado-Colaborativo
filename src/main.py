@@ -1,7 +1,7 @@
 import argparse
 from file_reader import read_file
 from metrics import pearson, cosine_similarity, euclidean_distance
-from predicciones import prediccion_simple, diferencia_con_media
+from predictions import simple_prediction, difference_with_average
 
 parser = argparse.ArgumentParser(prog='Sistemas de recomendación. Métodos de filtrado colaborativo', description='What the program does', epilog='Text at the bottom of help')
 parser.add_argument('-f', '--filename', type=str, required=True, help="Fichero de entrada")
@@ -36,9 +36,9 @@ for i in range(len(matrix)):
 
             neighbours = args.nVecinos
             if args.prediccion == 1:
-                matrix[i][j] = prediccion_simple(similarity, neighbours)
+                matrix[i][j] = simple_prediction(similarity, neighbours)
             elif args.prediccion == 2:
-                matrix[i][j] = diferencia_con_media(similarity, neighbours, matrix, i)
+                matrix[i][j] = difference_with_average(similarity, neighbours, matrix, i)
                 
             print("\033[1;34mResolvemos la incognita para el vector", i + 1, "\033[0m")
             print("Matrix resultante:")

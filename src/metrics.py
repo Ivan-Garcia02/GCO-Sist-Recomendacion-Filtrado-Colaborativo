@@ -9,7 +9,7 @@ def pearson(u_values, v_values):
             u_filtered_values.append(u_values[i])
             v_filtered_values.append(v_values[i])
 
-    # Calcula el coeficiente de correlacion de Pearson
+    # Calcula el coeficiente de correlación de Pearson
     u_average = sum(u_filtered_values) / len(u_filtered_values)
     v_average = sum(v_filtered_values) / len(v_filtered_values)
     numerator = 0
@@ -51,7 +51,7 @@ def euclidean_distance(u_values, v_values):
             u_filtered_values.append(u_values[i])
             v_filtered_values.append(v_values[i])
 
-    # Calcula la distancia euclidea
+    # Calcula la distancia euclídea
     summatory = 0
     for i in range(len(u_filtered_values)):
         summatory += math.pow(u_filtered_values[i] - v_filtered_values[i], 2)
