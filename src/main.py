@@ -18,6 +18,12 @@ max_value = args_read_file[2]
 if matrix is None:
     print('Ha ocurrido un error leyendo el fichero')
     quit()
+if args.nVecinos < 1:
+    print('El número de vecinos a considerar debe ser mínimo uno')
+    quit()
+if args.nVecinos >= len(matrix):
+    print('El número de vecinos a considerar no puede ser mayor que el número de vecinos existente')
+    quit()
 
 for i in range(len(matrix)):
     for j in range(len(matrix[i])):
@@ -34,16 +40,16 @@ for i in range(len(matrix)):
                         
             similarity.sort(key=lambda x: x[1], reverse=True)
 
-            # Calculo de la predicción
+            # Cálculo de la predicción
             neighbours = args.nVecinos
             if args.prediccion == 1:
                 matrix[i][j] = simple_prediction(similarity, neighbours)
             elif args.prediccion == 2:
                 matrix[i][j] = difference_with_average(similarity, neighbours, matrix, i)
                 
-            # Impresion de los resultados
-            print("\033[1;34mResolvemos la incognita en el vector", i + 1, "\033[0m")
-            print("Matrix resultante:")
+            # Impresión de los resultados
+            print("\033[1;34mResolvemos la incógnita en el usuario", i + 1, "\033[0m")
+            print("Matriz resultante:")
             for a in range(len(matrix)):
                 print("[", end="")
                 for b in range(len(matrix[a])):
@@ -66,10 +72,10 @@ for i in range(len(matrix)):
             for k in range(neighbours):
                 print(similarity[k][0] + 1, end=" ")
 
-            print("\n\nPrediccion en base a los vecinos considerados:\033[1;33m", round((matrix[i][j] + min_value), 3), "\033[0m\n\n")
+            print("\n\nPredicción en base a los vecinos considerados:\033[1;33m", round((matrix[i][j] + min_value), 3), "\033[0m\n")
             
-# Impresion de la matrix final
-print("\033[1;34mMATRIX FINAL:\033[0m")
+# Impresion de la matriz final
+print("\033[1;34m\nMATRIZ FINAL:\033[0m")
 for i in range(len(matrix)):
     print("[", end="")
     for j in range(len(matrix[i])):
