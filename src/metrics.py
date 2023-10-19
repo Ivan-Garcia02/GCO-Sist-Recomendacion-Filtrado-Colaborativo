@@ -1,7 +1,7 @@
 import math
 
 def pearson(u_values, v_values):
-    # Elimina las columnas con incognita
+    # Elimina las valoraciones no comunes entre los usuarios
     u_filtered_values = []
     v_filtered_values = []
     for i in range(len(u_values)):
@@ -22,8 +22,8 @@ def pearson(u_values, v_values):
 
     return round(numerator / (math.sqrt(u_denominator) * math.sqrt(v_denominator)), 10)
 
-def distancia_coseno(u_values, v_values):
-    # Elimina las columnas con incognita
+def cosine_similarity(u_values, v_values):
+    # Elimina las valoraciones no comunes entre los usuarios
     u_filtered_values = []
     v_filtered_values = []
     for i in range(len(u_values)):
@@ -42,8 +42,8 @@ def distancia_coseno(u_values, v_values):
 
     return round(numerator / (math.sqrt(u_denominator) * math.sqrt(v_denominator)), 10)
 
-def distancia_euclidea(u_values, v_values):
-    # Elimina las columnas con incognita
+def euclidean_distance(u_values, v_values):
+    # Elimina las valoraciones no comunes entre los usuarios
     u_filtered_values = []
     v_filtered_values = []
     for i in range(len(u_values)):

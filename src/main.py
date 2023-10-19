@@ -1,6 +1,6 @@
 import argparse
 from file_reader import read_file
-from metricas import pearson, distancia_coseno, distancia_euclidea
+from metrics import pearson, cosine_similarity, euclidean_distance
 from predicciones import prediccion_simple, diferencia_con_media
 
 parser = argparse.ArgumentParser(prog='Sistemas de recomendación. Métodos de filtrado colaborativo', description='What the program does', epilog='Text at the bottom of help')
@@ -28,9 +28,9 @@ for i in range(len(matrix)):
                     if args.metrica == 1:
                         similarity.append((k, pearson(matrix[i], matrix[k]), matrix[k][j]))
                     elif args.metrica == 2:
-                        similarity.append((k, distancia_coseno(matrix[i], matrix[k]), matrix[k][j]))
+                        similarity.append((k, cosine_similarity(matrix[i], matrix[k]), matrix[k][j]))
                     elif args.metrica == 3:
-                        similarity.append((k, distancia_euclidea(matrix[i], matrix[k]), matrix[k][j]))
+                        similarity.append((k, euclidean_distance(matrix[i], matrix[k]), matrix[k][j]))
                         
             similarity.sort(key=lambda x: x[1], reverse=True)
 
